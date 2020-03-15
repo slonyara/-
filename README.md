@@ -8,8 +8,7 @@
 <li> Гнездилов Кирилл Вячеславович 3 курс группа 2.2 <gnezdilov.kirill@list.ru>
 
 ## Навигация по документу
-https://github.com/slonyara/-/blob/master/Kursach_tp.docx
-https://github.com/slonyara/-/blob/master/%D1%82%D1%8D%D0%B7%D1%8D.docx
+https://github.com/slonyara/Tusa/tree/master/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F
 
 
 ## ссылки
