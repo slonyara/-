@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section class="contact-form-area pt-100 pb-90 blog-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="section-title text-center">
+                        <h1>{{ title }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="default-btn"><span>Отправить</span></button>
+                    </form>
+                    <p class="form-messege"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

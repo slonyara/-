@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="blog-details-area ptb-100 blog-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8">
+                    <img src="{{ cocktail.picture.url }}" alt="" width="100%">
+                    <h4 class="details-title">{{ cocktail.title }}</h4>
+                    <div class="post-information">
+                        <a href="">{{ cocktail.created_at }}</a>
+                    </div>
+                    <h4>Описание приготовления</h4>
+                    <p>
+                        {{ cocktail.description }}
+                    </p>
+                    <h4>Рецепт</h4>
+                    <p>
+                        {{ cocktail.recipe }}
+                    </p>
+                    {% if cocktail.author == user %}
+                        <p>
+                            <a href="{% url 'remove_view' cocktail.id %}" class="default-btn">Удалть коктейль</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'cocktail_update_view' cocktail.id %}" class="default-btn">Редактировать
+                                коктейль</a>
+                        </p>
+                    {% endif %}
+                    <div class="blog-details-content">
+                        <div class="content-text">
+                            <div class="content-list">
+                                <span><i class="zmdi zmdi-chevron-right"></i>Крепокость: {{ cocktail.fortress }}</span>
+                                <span><i class="zmdi zmdi-chevron-right"></i>Рейтинг: {{ cocktail.rating }}</span>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'add_rating_view' cocktail.id %}" class="default-btn" onclick="ym(64750285,'reachGoal','add_rating'); return true;">Оценить
+                                        коктейль</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

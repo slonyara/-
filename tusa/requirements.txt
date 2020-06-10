@@ -1,0 +1,17 @@
+asgiref==3.2.7
+cffi==1.14.0
+Django==3.0.6
+django-crispy-forms==1.9.0
+Pillow==7.1.2
+pycparser==2.20
+pytz==2020.1
+six==1.14.0
+sqlparse==0.3.1
+djangorestframework
+markdown
+django-filter
+django-rest-swagger
+drf-yasg
+factory_boy
+pytest
+pytest-django

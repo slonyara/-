@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="menu-area ptb-100 menu-section" id="items_app">
+        <div class="container" style="margin-bottom: 50px">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input @keyup="getSearch" v-model="search_model" placeholder="Поиск">
+                    <input @keyup="getSearch" v-model="min_rating" placeholder="Минимальный рейтинг">
+                    <input @keyup="getSearch" v-model="max_rating" placeholder="Максимальный рейтинг">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4" v-for="item, counter in items" v-if="count>0">
+                    <div class="single-menu text-center">
+                        <div class="menu-image">
+                            <span>${ item.rating } / 5</span>
+                            <a v-bind:href="item_url + item.id"><img v-bind:src="item.picture" alt=""></a>
+                        </div>
+                        <h4><a v-bind:href="item_url + item.id">${ item.title }</a></h4>
+                        <span>${ item.description }</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        new Vue({
+            delimiters: ['${', '}'],
+            el: '#items_app',
+            data: {
+                min_rating: '',
+                max_rating: '',
+                item_url: '{{ request.scheme }}://{{ request.get_host }}/cocktail/',
+                items: [],
+                count: 0,
+                offset: 0,
+                limit: 10,
+                next: '',
+                search_model: '',
+                url_method: 'cocktail/',
+                loading: true
+            },
+            http: {
+                root: '{{ request.scheme }}://{{ request.get_host }}/api/v1'
+            },
+            methods: {
+                getList: function () {
+                    if (this.loading) {
+                        this.loading = false;
+                        this.$http.get(this.url_method, {
+                            params: {
+                                limit: this.limit,
+                                offset: this.offset,
+                                search: this.search_model,
+                                min_rating: this.min_rating,
+                                max_rating: this.max_rating
+                            }
+                        }).then(function (data) {
+                            this.items = data.body.results;
+                            this.next = data.body.next;
+                            this.count = data.body.count;
+                            this.loading = data.ok;
+                        })
+                    }
+                },
+                getSearch: function (event) {
+                    this.offset = 0;
+                    this.getList();
+                },
+                add_offset: function () {
+                    if (this.loading) {
+                        this.offset += this.limit;
+                        if (this.offset > this.count) {
+                            this.offset -= this.limit;
+                        }
+                        this.getList();
+                    }
+                },
+                reduce_offset: function () {
+                    if (this.loading) {
+                        this.offset -= this.limit;
+                        if (this.offset < 0) {
+                            this.offset = 0;
+                        }
+                        this.getList();
+                    }
+                }
+            },
+            mounted: function () {
+                this.getList();
+            }
+        });
+    </script>
+{% endblock %}

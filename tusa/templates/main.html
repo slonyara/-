@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="menu-area ptb-100 menu-section">
+        <div class="container">
+            <div class="row">
+                {% for item in items %}
+                <div class="col-md-3 col-sm-4">
+                    <div class="single-menu text-center">
+                        <div class="menu-image">
+                            <span>{{item.rating}} / 5</span>
+                            <a href="{% url 'detailed_view' item.id %}"><img
+                                    src="{{item.picture.url}}" alt=""></a>
+                        </div>
+                        <h4><a href="{% url 'detailed_view' item.id %}">{{item.title}}</a></h4>
+                        <span>{{item.description}} </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
