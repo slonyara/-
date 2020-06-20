@@ -17,5 +17,5 @@ https://miro.com/app/board/o9J_kuhDZco=/
 
 ## ссылка на видео и почту 
 gnezdilov.kirill@list.ru
-https://youtu.be/kLBq2uzM_qo
+https://youtu.be/pG-8xWpLkqk
 toni.slon.2014@mail.ru
